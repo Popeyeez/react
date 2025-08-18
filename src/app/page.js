@@ -3,7 +3,7 @@ const Home = () => {
     <div className="flex">
       <div className="pt-10">
         <div class="w-120 h-125 rounded-md border-black">
-          <p class="text-indigo-700 pt-10 pl-10 text-2xl ">Hobby</p>
+          <p class="text-indigo-700 pt-10 pl-10 text-xl ">Hobby</p>
           <div className="flex gap-[15px] pl-10 pt-3">
             <div className="flex gap-3">
               <p className="text-5xl text-black font-bold"> 29$ </p>
