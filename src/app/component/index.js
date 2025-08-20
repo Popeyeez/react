@@ -1,2 +1,4 @@
-export * from "./box";
-export * from "./round";
+export * from "./Box";
+export * from "./Head";
+// export * from "./Input";
+// export * from "./Button";
