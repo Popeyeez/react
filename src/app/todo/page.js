@@ -2,8 +2,6 @@
 import { Input, Button, Checkbox, Task } from "../component";
 import { useState } from "react";
 const Todo = () => {
-  const todos = [];
-
   const task1 = {
     taskName: "false",
     isCompleted: false,
@@ -22,12 +20,11 @@ const Todo = () => {
           <div className="flex gap-2 items-center p-3">
             {arr}
 
-            <Button onClick={() => setArr(arr - 1)}>All </Button>
-            <Button onClick={() => setArr(arr / 2)}>Active</Button>
-            <Button onClick={() => setArr(arr * 2)}>Completed</Button>
+            <Button onClick={() => setArr(arr + 1)}>All </Button>
+            <Button onClick={() => setArr(arr + 1)}>Active</Button>
+            <Button onClick={() => setArr(arr + 1)}>Completed</Button>
           </div>
           <div className="pl-3 flex flex-col gap-2">
-            {/* <Task taskName={task.taskName} isCompleted={task.isCompleted} /> */}
             <Task taskName={task1.taskName} isCompleted={task1.isCompleted} />
           </div>
           <div className="p-3 flex flex-col gap-4 items-center">
@@ -46,14 +43,3 @@ const Todo = () => {
 };
 
 export default Todo;
-
-// const [todos, setTodos] = useState([]);
-// const [InputValue, setInputValue] = useStates("");
-// const handleOnchange = (event) => {
-//   setInputValue(event.target.value);
-// };
-
-// const handleOnClick = () => {
-//   setTodos([...todos, InputValue]);
-//   setInputValue("");
-// };
