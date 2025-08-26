@@ -1,11 +1,9 @@
-export const Input = () => {
+export const Input = (props) => {
   return (
     <input
-      type="text"
-      placeholder={"add a new task..."}
-      className="border  rounded pl-10 w-70 h-10"
+      {...props}
+      className="border rounded p-2 w-full"
+      placeholder="add a new task"
     />
   );
 };
-
-export default Input;
