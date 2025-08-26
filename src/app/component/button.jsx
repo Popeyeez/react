@@ -1,12 +1,10 @@
-export const Button = (props) => {
+export const Button = ({ children, className = "", ...props }) => {
   return (
     <button
-      onClick={props.onClick}
-      className="bg-[#F3F4F6] text-black rounded h-10 items-center w-25 hover:bg-blue-500 hover:text-white"
+      className={`px-4 py-2 rounded-xl font-medium ${className}`}
+      {...props}
     >
-      {props.button}
-      {props.children}
+      {children}
     </button>
   );
 };
-export default Button;

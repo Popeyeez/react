@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "../component";
 import { useState } from "react";
-
 const Task2 = () => {
   const [inputValue, setInputValue] = useState(" ");
   const [count, setCount] = useState(0);
