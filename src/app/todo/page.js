@@ -131,7 +131,6 @@ const Todo = () => {
                       Completed
                     </button>
                   )}
-                  {haà
                 </div>
               </div>
             ))}
