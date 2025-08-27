@@ -12,6 +12,7 @@ const MediumTodoList = () => {
   const handleAddTodo = () => {
     setTodos([...todos, inputValue]);
     console.log("add todo", todos);
+    setInputValue("");
   };
 
   const handleDeleteTodo = (index) => {

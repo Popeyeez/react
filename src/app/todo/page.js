@@ -1,6 +1,7 @@
 "use client";
 import { Input, Button, Task } from "../component";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const Todo = () => {
   const [inputValue, setInputValue] = useState("");
@@ -11,7 +12,8 @@ const Todo = () => {
   };
   const handleAddTodo = () => {
     if (inputValue.trim() === "") return;
-    setTodos([...todos, { title: inputValue, isDone: false }]);
+    setTodos([...todos, { title: inputValue, isDone: false, id: uuidv4() }]);
+    setInputValue("");
   };
 
   const [filterStatus, setFilterStatus] = useState("all");
@@ -26,9 +28,30 @@ const Todo = () => {
     setTodos(newTodos);
   };
   const handleDeleteTodo = (index) => {
+    alert("Delete?");
     const newTodos = todos.filter((t, i) => i !== index);
     setTodos(newTodos);
   };
+  const handleUpdateTodo = (index) => {
+    <input />;
+  };
+
+  const completeDeleteTodo = () => {
+    alert("Delete?");
+    const newTodos = todos.filter((el) => {
+      if (el.isDone == false) return el;
+    });
+
+    setTodos(newTodos);
+  };
+  const filteredTodos = todos.filter((t) => {
+    if (filterStatus === "all") return true;
+    if (filterStatus === "Active") return !t.isDone;
+    return t.isDone;
+  });
+  const completedTodo = todos.filter((el) => {
+    if (el.isDone == true) return el;
+  });
   return (
     <div>
       <div className="bg-gray-200 h-screen flex justify-center pt-[60px]">
@@ -37,6 +60,7 @@ const Todo = () => {
 
           <div className="p-3 flex gap-2">
             <Input
+              value={inputValue}
               onChange={handleOnChange}
               type="text"
               placeholder="Add a task..."
@@ -77,23 +101,59 @@ const Todo = () => {
               Completed
             </Button>
           </div>
-
-          {todos.map((t, index) => (
-            <div key={index} className="pl-3 flex gap-2">
-              <input
-                onChange={(event) => handleOnCheckBox(event, index)}
-                type="checkbox"
-                defaultChecked={t.isDone}
-              />
-              <p>{t.title}</p>
-              <button onClick={() => handleDeleteTodo(index)}>Delete</button>
-            </div>
-          ))}
-
-          <div className="p-3 flex flex-col gap-4 items-center">
-            <h3 className="text-[#6B7280] text-center">
+          <div className="flex gap-3 flex-col items-center">
+            {filteredTodos.map((t, index) => (
+              <div
+                key={t.id}
+                className="pl-3 gap-2 w-[345] h-[62] bg-[#F3F4F6] rounded-md flex items-center justify-between p-5"
+              >
+                <div className="flex gap-3">
+                  <input
+                    onChange={(event) => handleOnCheckBox(event, index)}
+                    type="checkbox"
+                    checked={t.isDone}
+                  />
+                  <p className={t.isDone ? "line-through" : ""}>{t.title}</p>
+                </div>
+                <div className="flex items-center">
+                  {t.isDone ? (
+                    <button
+                      onClick={() => handleDeleteTodo(index)}
+                      className="p-1 bg-red-200 text-red-500 rounded-md mr-4"
+                    >
+                      Delete
+                    </button>
+                  ) : (
+                    <button
+                      className="p-1 bg-blue-200 text-blue-500 rounded-md "
+                      onClick={() => handleUpdateTodo(index)}
+                    >
+                      Completed
+                    </button>
+                  )}
+                  {haà
+                </div>
+              </div>
+            ))}
+          </div>
+          {todos.length < 1 ? (
+            <h3 className="text-[#6B7280] text-center mt-2">
               No tasks yet. Add one above!
             </h3>
+          ) : (
+            <h3 className="flex items-center ml-6 mt-3 text-[#6B7280]">
+              {completedTodo.length} of {todos.length}
+              <button
+                onClick={() => completeDeleteTodo()}
+                className="text-red-500 ml-44"
+              >
+                Clear completed
+              </button>
+            </h3>
+          )}
+          {/* {condition ? (true) : (false)} */}
+
+          <div className="p-3 flex flex-col gap-4 items-center">
             <p className="flex gap-2">
               Powered by
               <a className="text-[#3B73ED]" href="">
@@ -106,5 +166,4 @@ const Todo = () => {
     </div>
   );
 };
-
 export default Todo;
