@@ -1,4 +1,4 @@
-export const Box = (props) => {
+export const Case = (props) => {
   return (
     <div className="w-75 h-140 bg-gray-100  rounded-2xl">
       <div className="w-75 h-60 flex justify-center items-center">

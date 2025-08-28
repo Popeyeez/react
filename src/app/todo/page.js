@@ -1,5 +1,5 @@
 "use client";
-import { Input, Button } from "../component";
+import { In, Btn } from "../component";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -60,17 +60,17 @@ const Todo = () => {
           <div className="text-2xl text-center pt-[24px]">To-Do list</div>
 
           <div className="p-3 flex gap-2">
-            <Input
+            <In
               value={inputValue}
               onChange={handleOnChange}
               type="text"
               placeholder="Add a task..."
             />
-            <Button onClick={handleAddTodo}>Add</Button>
+            <Btn onClick={handleAddTodo}>Add</Btn>
           </div>
 
           <div className="flex gap-2 items-center p-3">
-            <Button
+            <Btn
               onClick={() => handleFilterStatus("all")}
               className={` ${
                 filterStatus === "all"
@@ -79,9 +79,9 @@ const Todo = () => {
               }`}
             >
               All
-            </Button>
+            </Btn>
 
-            <Button
+            <Btn
               onClick={() => handleFilterStatus("Active")}
               className={` ${
                 filterStatus === "Active"
@@ -90,8 +90,8 @@ const Todo = () => {
               }`}
             >
               Active
-            </Button>
-            <Button
+            </Btn>
+            <Btn
               onClick={() => handleFilterStatus("Completed")}
               className={` ${
                 filterStatus === "Completed"
@@ -100,7 +100,7 @@ const Todo = () => {
               }`}
             >
               Completed
-            </Button>
+            </Btn>
           </div>
           <div className="flex gap-3 flex-col items-center">
             {filteredTodos.map((t, index) => (

@@ -1,4 +1,4 @@
-export const Input = (props) => {
+export const In = (props) => {
   return (
     <input
       {...props}
