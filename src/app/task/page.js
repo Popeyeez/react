@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "../component";
+import { Btn } from "../component";
 import { useState } from "react";
 const Task2 = () => {
   const [inputValue, setInputValue] = useState(" ");
@@ -24,12 +24,12 @@ const Task2 = () => {
         onChange={handleOnchange}
       />
 
-      <Button onClick={handleOnClick}>add</Button>
+      <Btn onClick={handleOnClick}>add</Btn>
 
       {hide && <div>{inputValue}</div>}
       <div>{"Character: " + count}</div>
 
-      <Button onClick={() => setHide(!hide)}>Show/Hide</Button>
+      <Btn onClick={() => setHide(!hide)}>Show/Hide</Btn>
     </div>
   );
 };
