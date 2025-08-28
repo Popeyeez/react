@@ -1,5 +1,5 @@
 "use client";
-import { Input, Button, Task } from "../component";
+import { Input, Button } from "../component";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -11,9 +11,10 @@ const Todo = () => {
     setInputValue(event.target.value);
   };
   const handleAddTodo = () => {
-    if (inputValue.trim() === "") return;
-    setTodos([...todos, { title: inputValue, isDone: false, id: uuidv4() }]);
-    setInputValue("");
+    if (inputValue !== "") {
+      setTodos([...todos, { title: inputValue, isDone: false, id: uuidv4() }]);
+      setInputValue("");
+    }
   };
 
   const [filterStatus, setFilterStatus] = useState("all");
