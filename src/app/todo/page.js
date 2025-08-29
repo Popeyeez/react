@@ -22,15 +22,15 @@ const Todo = () => {
     setFilterStatus(status);
   };
   const handleOnCheckBox = (event, index) => {
-    const newTodos = todos.map((t, i) => {
-      if (i === index) t.isDone = event.target.checked;
+    const newTodos = todos.map((t) => {
+      if (t.id === index) t.isDone = event.target.checked;
       return t;
     });
     setTodos(newTodos);
   };
   const handleDeleteTodo = (index) => {
     alert("Delete?");
-    const newTodos = todos.filter((t, i) => i !== index);
+    const newTodos = todos.filter((t) => t.id !== index);
     setTodos(newTodos);
   };
   const handleUpdateTodo = (index) => {
@@ -39,8 +39,8 @@ const Todo = () => {
 
   const completeDeleteTodo = () => {
     alert("Delete?");
-    const newTodos = todos.filter((el) => {
-      if (el.isDone == false) return el;
+    const newTodos = todos.filter((t) => {
+      if (t.isDone == false) return t;
     });
 
     setTodos(newTodos);
@@ -50,8 +50,8 @@ const Todo = () => {
     if (filterStatus === "Active") return !t.isDone;
     return t.isDone;
   });
-  const completedTodo = todos.filter((el) => {
-    if (el.isDone == true) return el;
+  const completedTodo = todos.filter((t) => {
+    if (t.isDone == true) return t;
   });
   return (
     <div>
@@ -106,11 +106,11 @@ const Todo = () => {
             {filteredTodos.map((t, index) => (
               <div
                 key={t.id}
-                className="pl-3 gap-2 w-[345] h-[62] bg-[#F3F4F6] rounded-md flex items-center justify-between p-5"
+                className="pl-3 gap-2 w-[345px] h-[62px] bg-[#F3F4F6] rounded-md flex items-center justify-between p-5"
               >
                 <div className="flex gap-3">
                   <input
-                    onChange={(event) => handleOnCheckBox(event, index)}
+                    onChange={(event) => handleOnCheckBox(event, t.id)}
                     type="checkbox"
                     checked={t.isDone}
                   />
@@ -119,7 +119,7 @@ const Todo = () => {
                 <div className="flex items-center">
                   {t.isDone ? (
                     <button
-                      onClick={() => handleDeleteTodo(index)}
+                      onClick={() => handleDeleteTodo(t.id)}
                       className="p-1 bg-red-200 text-red-500 rounded-md mr-4"
                     >
                       Delete
