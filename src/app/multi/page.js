@@ -22,6 +22,9 @@ const Multi = () => {
     date: "",
   });
   const [step, setStep] = useState("basic");
+
+  console.log(form);
+
   function submit() {
     setStep("image");
   }
@@ -43,6 +46,7 @@ const Multi = () => {
         form={form}
         onChange={setForm}
         onChangeStep={submit}
+        useState={useState}
       />
     );
   }
@@ -56,6 +60,7 @@ const Multi = () => {
         onChange={setForm}
         onChangeStep={last}
         onChangeBack={back}
+        useState={useState}
       />
     );
   }
@@ -69,6 +74,7 @@ const Multi = () => {
         onChange={setForm}
         onChangeStep={end}
         onChangeBack={submit}
+        useState={useState}
       />
     );
   }

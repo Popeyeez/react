@@ -1,11 +1,5 @@
-export const Title = ({ children, ...props }) => {
-  return (
-    <div className="flex gap-2">
-      <p className="text-[#334155] text-[14px] font-semibold text-<14px>/[<16px>] flex gap-1">
-        {props.children}
-      </p>
-    </div>
-  );
+export const Title = () => {
+  return <div className="text-[24px] font-semibold flex gap-1"></div>;
 };
 
 // text
