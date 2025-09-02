@@ -18,7 +18,8 @@ export const LastForm = ({
           <h3 className="text-[#8E8E8E] text-[18px] font-normal">
             Please provide all current information accurately.
           </h3>
-          <Title /> Date of birth
+          <Title text="Date of birth" />
+
           <Input
             type="date"
             value={form.date}
@@ -30,7 +31,8 @@ export const LastForm = ({
               })
             }
           />
-          <Title /> Profile image
+          <Title text="Profile image" />
+
           <Input
             type="date"
             value={form.date}

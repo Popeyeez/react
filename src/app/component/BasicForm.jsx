@@ -44,7 +44,7 @@ export const BasicForm = ({
           <h3 className="text-[#8E8E8E] text-[18px] font-normal">
             Please provide all current information accurately.
           </h3>
-          <Title /> First name
+          <Title text="First name" />
           <Input
             value={form.firstName}
             placeholder="First name"
@@ -53,7 +53,8 @@ export const BasicForm = ({
           {errors.firstName && (
             <div className="text-red-500">{errors.firstName}</div>
           )}
-          <Title /> Last name
+          <Title text="Last name" />
+
           <Input
             value={form.lastName}
             placeholder="Last name"
@@ -62,7 +63,8 @@ export const BasicForm = ({
           {errors.lastName && (
             <div className="text-red-500">{errors.lastName}</div>
           )}
-          <Title /> Username
+          <Title text="Username" />
+
           <Input
             value={form.userName}
             placeholder="Username"

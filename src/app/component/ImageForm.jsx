@@ -21,14 +21,20 @@ export function ImageForm({
       newErrors.email = "Имэйл хаяг зөв оруулна уу";
     }
 
-    if (phoneRegex.test(form.phone)) {
-      newErrors.phone = null;
+    if (phoneRegex.test(form.phoneNumber)) {
+      newErrors.phoneNumber = null;
     } else {
-      newErrors.phone = "Утасны дугаар зөв оруулна уу";
+      newErrors.phoneNumber = "Утасны дугаар зөв оруулна уу";
+    }
+
+    if (form.password === form.confirmPassword) {
+      newErrors.confirmPassword = null;
+    } else {
+      newErrors.confirmPassword = "Нууц үг ижил байх ёстой";
     }
 
     setErrors(newErrors);
-    if (!newErrors.email && !newErrors.phone) {
+    if (!newErrors.email && !newErrors.phone && newErrors.confirmPassword) {
       onChangeStep("onChangeStep");
     }
   }
@@ -43,7 +49,8 @@ export function ImageForm({
           <h3 className="text-[#8E8E8E] text-[18px] font-normal">
             Please provide all current information accurately.
           </h3>
-          <Title /> Email
+          <Title text="Email" />
+
           <Input
             value={form.email}
             placeholder="Email"
@@ -55,7 +62,8 @@ export function ImageForm({
             }
           />
           {errors.email && <div className="text-red-500">{errors.email}</div>}
-          <Title /> Phone number
+          <Title text="Phone number" />
+
           <Input
             value={form.phoneNumber}
             type="number"
@@ -67,8 +75,11 @@ export function ImageForm({
               })
             }
           />
-          {errors.phone && <div className="text-red-500">{errors.phone}</div>}
-          <Title /> Password
+          {errors.phoneNumber && (
+            <div className="text-red-500">{errors.phoneNumber}</div>
+          )}
+          <Title text="Password" />
+
           <Input
             type="password"
             value={form.password}
@@ -80,7 +91,8 @@ export function ImageForm({
               })
             }
           />
-          <Title /> Confirm password
+          <Title text="Confirm password" />
+
           <Input
             type="password"
             value={form.confirmPassword}
@@ -92,6 +104,7 @@ export function ImageForm({
               })
             }
           />
+          <div className="text-red-500">{errors.confirmPassword}</div>
         </div>
         <div className="flex gap-[8px] mb-[32px] box-border mx-[32px]">
           <Button
