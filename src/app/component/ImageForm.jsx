@@ -34,7 +34,7 @@ export function ImageForm({
     }
 
     setErrors(newErrors);
-    if (!newErrors.email && !newErrors.phone && newErrors.confirmPassword) {
+    if (!newErrors.email && !newErrors.phone && !newErrors.confirmPassword) {
       onChangeStep("onChangeStep");
     }
   }

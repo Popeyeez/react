@@ -151,7 +151,7 @@ const Todo = () => {
               </button>
             </h3>
           )}
-          {/* {condition ? (true) : (false)} */}
+          {/* {condition ? true : false} */}
 
           <div className="p-3 flex flex-col gap-4 items-center">
             <p className="flex gap-2">

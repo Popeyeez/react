@@ -7,6 +7,37 @@ export const LastForm = ({
   onChangeStep,
   onChangeBack,
 }) => {
+  const [errors, setErrors] = useState({});
+
+  function goToNext() {
+    const newErrors = {};
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const phoneRegex = /^[89]\d{7}$/;
+
+    if (emailRegex.test(form.email)) {
+      newErrors.email = null;
+    } else {
+      newErrors.email = "Имэйл хаяг зөв оруулна уу";
+    }
+
+    if (phoneRegex.test(form.phoneNumber)) {
+      newErrors.phoneNumber = null;
+    } else {
+      newErrors.phoneNumber = "Утасны дугаар зөв оруулна уу";
+    }
+
+    if (form.password === form.confirmPassword) {
+      newErrors.confirmPassword = null;
+    } else {
+      newErrors.confirmPassword = "Нууц үг ижил байх ёстой";
+    }
+
+    setErrors(newErrors);
+    if (!newErrors.email && !newErrors.phone && !newErrors.confirmPassword) {
+      onChangeStep("onChangeStep");
+    }
+  }
+
   return (
     <div className="w-full h-screen bg-gray-300 flex justify-center items-center">
       <div className="w-[480px] h-[655px] bg-white box-border flex flex-col justify-between">
@@ -52,7 +83,7 @@ export const LastForm = ({
           >
             Back
           </Button>
-          <Button onClick={onChangeStep} className={"text-white w-full"}>
+          <Button onClick={goToNext} className={"text-white w-full"}>
             Continue 3/3
           </Button>
         </div>

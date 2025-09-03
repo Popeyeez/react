@@ -45,6 +45,7 @@ export const BasicForm = ({
             Please provide all current information accurately.
           </h3>
           <Title text="First name" />
+
           <Input
             value={form.firstName}
             placeholder="First name"
