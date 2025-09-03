@@ -1,39 +1,30 @@
 export const LastForm = ({
-  Title,
   Input,
   Button,
   form,
   onChange,
   onChangeStep,
   onChangeBack,
+  useState,
 }) => {
   const [errors, setErrors] = useState({});
 
   function goToNext() {
     const newErrors = {};
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    const phoneRegex = /^[89]\d{7}$/;
-
-    if (emailRegex.test(form.email)) {
-      newErrors.email = null;
+    const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+    const fileRegex = /^.+$/;
+    if (dateRegex.test(form.date)) {
+      newErrors.date = null;
     } else {
-      newErrors.email = "Имэйл хаяг зөв оруулна уу";
+      newErrors.date = "Он сар зөв оруулна уу";
     }
-
-    if (phoneRegex.test(form.phoneNumber)) {
-      newErrors.phoneNumber = null;
+    if (fileRegex.test(form.file)) {
+      newErrors.file = null;
     } else {
-      newErrors.phoneNumber = "Утасны дугаар зөв оруулна уу";
+      newErrors.file = "Зураг оруулна уу";
     }
-
-    if (form.password === form.confirmPassword) {
-      newErrors.confirmPassword = null;
-    } else {
-      newErrors.confirmPassword = "Нууц үг ижил байх ёстой";
-    }
-
     setErrors(newErrors);
-    if (!newErrors.email && !newErrors.phone && !newErrors.confirmPassword) {
+    if (!newErrors.date && !newErrors.file) {
       onChangeStep("onChangeStep");
     }
   }
@@ -49,9 +40,9 @@ export const LastForm = ({
           <h3 className="text-[#8E8E8E] text-[18px] font-normal">
             Please provide all current information accurately.
           </h3>
-          <Title text="Date of birth" />
 
           <Input
+            label="Date of birth"
             type="date"
             value={form.date}
             placeholder="date"
@@ -61,29 +52,33 @@ export const LastForm = ({
                 date: e.target.value,
               })
             }
+            error={errors.date}
           />
-          <Title text="Profile image" />
-
-          <Input
-            type="date"
-            value={form.date}
-            placeholder="date"
-            onChange={(e) =>
-              onChange({
-                ...form,
-                date: e.target.value,
-              })
-            }
-          />
+          <div className="text-[14px] font-semibold flex gap-1 text-[#334155] mt-3">
+            Profile image
+            <span className="text-[#E14942] text-[14px] font-semibold">*</span>
+          </div>
+          <div className="h-50 w-full flex justify-center items-center bg-amber-600 relative">
+            Add image
+            <input
+              className="h-50 border rounded-lg inset-0 opacity-0 absolute"
+              type="file"
+              placeholder="date"
+              onChange={(e) =>
+                onChange({
+                  ...form,
+                  file: e.target.value,
+                })
+              }
+            />
+          </div>
+          {errors.file && <div className="text-red-500"> {errors.file}</div>}
         </div>
         <div className="flex gap-[8px] mb-[32px] box-border mx-[32px]">
-          <Button
-            onClick={onChangeBack}
-            className={"bg-white text-black w-[140px]"}
-          >
+          <Button variant="secondary" onClick={onChangeBack}>
             Back
           </Button>
-          <Button onClick={goToNext} className={"text-white w-full"}>
+          <Button variant="primary" onClick={goToNext}>
             Continue 3/3
           </Button>
         </div>

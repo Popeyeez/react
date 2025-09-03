@@ -3,7 +3,6 @@ export * from "./Upper";
 export * from "./In";
 export * from "./Btn";
 export * from "./Input";
-export * from "./Title";
 export * from "./Button";
 export * from "./BasicForm";
 export * from "./ImageForm";

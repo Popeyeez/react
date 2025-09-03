@@ -1,7 +1,6 @@
 "use client";
 import {
   Input,
-  Title,
   Button,
   BasicForm,
   ImageForm,
@@ -20,6 +19,7 @@ const Multi = () => {
     password: "",
     confirmPassword: "",
     date: "",
+    file: "",
   });
   const [step, setStep] = useState("basic");
 
@@ -40,7 +40,6 @@ const Multi = () => {
   if (step === "basic") {
     return (
       <BasicForm
-        Title={Title}
         Input={Input}
         Button={Button}
         form={form}
@@ -53,7 +52,6 @@ const Multi = () => {
   if (step === "image") {
     return (
       <ImageForm
-        Title={Title}
         Input={Input}
         Button={Button}
         form={form}
@@ -67,7 +65,6 @@ const Multi = () => {
   if (step === "last") {
     return (
       <LastForm
-        Title={Title}
         Input={Input}
         Button={Button}
         form={form}

@@ -1,5 +1,4 @@
 export const BasicForm = ({
-  Title,
   Input,
   Button,
   form,
@@ -44,43 +43,33 @@ export const BasicForm = ({
           <h3 className="text-[#8E8E8E] text-[18px] font-normal">
             Please provide all current information accurately.
           </h3>
-          <Title text="First name" />
 
           <Input
+            label="First name"
             value={form.firstName}
             placeholder="First name"
             onChange={(e) => onChange({ ...form, firstName: e.target.value })}
+            error={errors.firstName}
           />
-          {errors.firstName && (
-            <div className="text-red-500">{errors.firstName}</div>
-          )}
-          <Title text="Last name" />
 
           <Input
+            label="Last name"
             value={form.lastName}
             placeholder="Last name"
             onChange={(e) => onChange({ ...form, lastName: e.target.value })}
+            error={errors.lastName}
           />
-          {errors.lastName && (
-            <div className="text-red-500">{errors.lastName}</div>
-          )}
-          <Title text="Username" />
 
           <Input
+            label="Username"
             value={form.userName}
             placeholder="Username"
             onChange={(e) => onChange({ ...form, userName: e.target.value })}
+            error={errors.userName}
           />
-          {errors.userName && (
-            <div className="text-red-500">{errors.userName}</div>
-          )}
         </div>
-
-        <div className="flex justify-center">
-          <Button
-            onClick={goToNext}
-            className="text-white w-full mb-[32px] mx-[32px]"
-          >
+        <div className="flex gap-[8px] mb-[32px] box-border mx-[32px]">
+          <Button variant="primary" onClick={goToNext}>
             Continue 1/3
           </Button>
         </div>

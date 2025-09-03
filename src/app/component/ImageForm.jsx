@@ -1,5 +1,4 @@
 export function ImageForm({
-  Title,
   Input,
   Button,
   form,
@@ -32,9 +31,19 @@ export function ImageForm({
     } else {
       newErrors.confirmPassword = "Нууц үг ижил байх ёстой";
     }
+    if (form.password !== "") {
+      newErrors.password = null;
+    } else {
+      newErrors.password = "Нууц үг хийнэ үү";
+    }
 
     setErrors(newErrors);
-    if (!newErrors.email && !newErrors.phone && !newErrors.confirmPassword) {
+    if (
+      !newErrors.email &&
+      !newErrors.phoneNumber &&
+      !newErrors.confirmPassword &&
+      !newErrors.password
+    ) {
       onChangeStep("onChangeStep");
     }
   }
@@ -49,9 +58,8 @@ export function ImageForm({
           <h3 className="text-[#8E8E8E] text-[18px] font-normal">
             Please provide all current information accurately.
           </h3>
-          <Title text="Email" />
-
           <Input
+            label="Email"
             value={form.email}
             placeholder="Email"
             onChange={(e) =>
@@ -60,11 +68,10 @@ export function ImageForm({
                 email: e.target.value,
               })
             }
+            error={errors.email}
           />
-          {errors.email && <div className="text-red-500">{errors.email}</div>}
-          <Title text="Phone number" />
-
           <Input
+            label="Phone number"
             value={form.phoneNumber}
             type="number"
             placeholder={"Phone number"}
@@ -74,13 +81,10 @@ export function ImageForm({
                 phoneNumber: e.target.value,
               })
             }
+            error={errors.phoneNumber}
           />
-          {errors.phoneNumber && (
-            <div className="text-red-500">{errors.phoneNumber}</div>
-          )}
-          <Title text="Password" />
-
           <Input
+            label="Password"
             type="password"
             value={form.password}
             placeholder={"Password"}
@@ -90,10 +94,10 @@ export function ImageForm({
                 password: e.target.value,
               })
             }
+            error={errors.password}
           />
-          <Title text="Confirm password" />
-
           <Input
+            label="Confirm password"
             type="password"
             value={form.confirmPassword}
             placeholder={"Confirm password"}
@@ -103,17 +107,14 @@ export function ImageForm({
                 confirmPassword: e.target.value,
               })
             }
+            error={errors.confirmPassword}
           />
-          <div className="text-red-500">{errors.confirmPassword}</div>
         </div>
         <div className="flex gap-[8px] mb-[32px] box-border mx-[32px]">
-          <Button
-            onClick={onChangeBack}
-            className={"bg-white text-black w-[140px]"}
-          >
+          <Button variant="secondary" onClick={onChangeBack}>
             Back
           </Button>
-          <Button onClick={goToNext} className={"text-white w-full"}>
+          <Button variant="primary" onClick={goToNext}>
             Continue 2/3
           </Button>
         </div>
