@@ -13,25 +13,32 @@ export const LastForm = ({
 
   function handleImageChange(e) {
     const file = e.target.files[0];
+    if (!file) return;
+
     const filePreview = URL.createObjectURL(file);
     setPreview(filePreview);
+
+    onChange({
+      ...form,
+      file: file,
+    });
   }
   function goToNext() {
     const newErrors = {};
     const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-    const fileRegex = /^.+$/;
+
     if (dateRegex.test(form.date)) {
       newErrors.date = null;
     } else {
       newErrors.date = "Он сар зөв оруулна уу";
     }
-    if (fileRegex.test(form.file)) {
+    if (form.file) {
       newErrors.file = null;
     } else {
       newErrors.file = "Зураг оруулна уу";
     }
     setErrors(newErrors);
-    if (!newErrors.date) {
+    if (!newErrors.date && !newErrors.file) {
       onChangeStep("onChangeStep");
     }
   }
@@ -73,12 +80,18 @@ export const LastForm = ({
           </div>
           <div className="h-50 w-full flex justify-center items-center relative overflow-hidden">
             Add image
-            {preview && <img src={preview} className="inset-0 absolute" />}
+            {preview && (
+              <img
+                src={preview}
+                alt="preview"
+                className="inset-0 absolute w-full h-full object-cover"
+              />
+            )}
             <input
               className="h-50 border rounded-lg inset-0 opacity-0 absolute"
               type="file"
               placeholder="date"
-              onchange={handleImageChange}
+              onChange={handleImageChange}
             />
           </div>
 
