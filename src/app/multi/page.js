@@ -8,6 +8,7 @@ import {
   EndForm,
 } from "../component";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Multi = () => {
   const [form, setForm] = useState({
@@ -46,6 +47,7 @@ const Multi = () => {
         onChange={setForm}
         onChangeStep={submit}
         useState={useState}
+        motion={motion}
       />
     );
   }
@@ -59,6 +61,7 @@ const Multi = () => {
         onChangeStep={last}
         onChangeBack={back}
         useState={useState}
+        motion={motion}
       />
     );
   }
@@ -72,11 +75,12 @@ const Multi = () => {
         onChangeStep={end}
         onChangeBack={submit}
         useState={useState}
+        motion={motion}
       />
     );
   }
   if (step === "end") {
-    return <EndForm />;
+    return <EndForm motion={motion} />;
   }
 };
 export default Multi;

@@ -5,24 +5,25 @@ export const BasicForm = ({
   onChange,
   onChangeStep,
   useState,
+  motion,
 }) => {
   const [errors, setErrors] = useState({});
 
   function goToNext() {
     const newErrors = {};
+    const nameRegex = /^[A-Za-zА-Яа-яӨөҮүЁё]+$/;
 
-    if (form.firstName !== "") {
+    if (nameRegex.test(form.firstName)) {
       newErrors.firstName = null;
     } else {
       newErrors.firstName = "Нэр ээ зөв оруулна уу";
     }
-
-    if (form.lastName !== "") {
+    if (nameRegex.test(form.lastName)) {
       newErrors.lastName = null;
     } else {
       newErrors.lastName = "Овог нэр ээ зөв оруулна уу";
     }
-    if (form.userName !== "") {
+    if (nameRegex.test(form.userName)) {
       newErrors.userName = null;
     } else {
       newErrors.userName = "Хэрэглэгчийн нэр ээ зөв оруулна уу";
@@ -34,7 +35,13 @@ export const BasicForm = ({
   }
   return (
     <div className="w-full h-screen bg-gray-300 flex justify-center items-center">
-      <div className="w-[480px] h-[642px] bg-white box-border flex flex-col justify-between">
+      <motion.div
+        initial={{ x: -40, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: 40, opacity: 0 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="w-[480px] h-[642px] bg-white box-border flex flex-col justify-between rounded-[8px]"
+      >
         <div className="m-[32px] flex gap-[8px] flex-col">
           <img className="w-[60px] h-[60px]" src="main1.png" alt="" />
           <h3 className="text-[#202124] text-[26px] font-semibold">
@@ -73,7 +80,7 @@ export const BasicForm = ({
             Continue 1/3
           </Button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

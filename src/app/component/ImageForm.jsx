@@ -6,6 +6,7 @@ export function ImageForm({
   onChangeStep,
   onChangeBack,
   useState,
+  motion,
 }) {
   const [errors, setErrors] = useState({});
 
@@ -49,7 +50,13 @@ export function ImageForm({
   }
   return (
     <div className="w-full h-screen bg-gray-300 flex justify-center items-center">
-      <div className="w-[480px] h-[fit] bg-white box-border flex flex-col justify-between">
+      <motion.div
+        initial={{ x: -40, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: 40, opacity: 0 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="w-[480px] h-[fit] bg-white box-border flex flex-col justify-between rounded-[8px]"
+      >
         <div className="m-[32px] flex gap-[8px] flex-col">
           <img className="w-[60px] h-[60px]" src="main1.png" alt="" />
           <h3 className="text-[#202124] text-[26px] font-semibold">
@@ -118,7 +125,7 @@ export function ImageForm({
             Continue 2/3
           </Button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -6,9 +6,16 @@ export const LastForm = ({
   onChangeStep,
   onChangeBack,
   useState,
+  motion,
 }) => {
   const [errors, setErrors] = useState({});
+  const [preview, setPreview] = useState();
 
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    const filePreview = URL.createObjectURL(file);
+    setPreview(filePreview);
+  }
   function goToNext() {
     const newErrors = {};
     const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
@@ -24,14 +31,20 @@ export const LastForm = ({
       newErrors.file = "Зураг оруулна уу";
     }
     setErrors(newErrors);
-    if (!newErrors.date && !newErrors.file) {
+    if (!newErrors.date) {
       onChangeStep("onChangeStep");
     }
   }
 
   return (
     <div className="w-full h-screen bg-gray-300 flex justify-center items-center">
-      <div className="w-[480px] h-[655px] bg-white box-border flex flex-col justify-between">
+      <motion.div
+        initial={{ x: -40, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: 40, opacity: 0 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="w-[480px] h-fit bg-white box-border flex flex-col justify-between rounded-[8px]"
+      >
         <div className="m-[32px] flex gap-[8px] flex-col">
           <img className="w-[60px] h-[60px]" src="main1.png" alt="" />
           <h3 className="text-[#202124] text-[26px] font-semibold">
@@ -58,20 +71,17 @@ export const LastForm = ({
             Profile image
             <span className="text-[#E14942] text-[14px] font-semibold">*</span>
           </div>
-          <div className="h-50 w-full flex justify-center items-center bg-amber-600 relative">
+          <div className="h-50 w-full flex justify-center items-center relative overflow-hidden">
             Add image
+            {preview && <img src={preview} className="inset-0 absolute" />}
             <input
               className="h-50 border rounded-lg inset-0 opacity-0 absolute"
               type="file"
               placeholder="date"
-              onChange={(e) =>
-                onChange({
-                  ...form,
-                  file: e.target.value,
-                })
-              }
+              onchange={handleImageChange}
             />
           </div>
+
           {errors.file && <div className="text-red-500"> {errors.file}</div>}
         </div>
         <div className="flex gap-[8px] mb-[32px] box-border mx-[32px]">
@@ -82,7 +92,7 @@ export const LastForm = ({
             Continue 3/3
           </Button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
