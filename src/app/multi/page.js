@@ -7,8 +7,9 @@ import {
   LastForm,
   EndForm,
 } from "../component";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { jsx } from "react/jsx-runtime";
 
 const Multi = () => {
   const [form, setForm] = useState({
@@ -22,9 +23,16 @@ const Multi = () => {
     date: "",
     file: "",
   });
-  const [step, setStep] = useState("basic");
 
-  console.log(form);
+  useEffect(() => {
+    const localForm = localStorage.getItem("my-form");
+    if (localForm) {
+      setForm(JSON.parse(localForm));
+    }
+    console.log(localForm);
+  }, []);
+
+  const [step, setStep] = useState("basic");
 
   function submit() {
     setStep("image");

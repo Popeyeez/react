@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export const BasicForm = ({
   Input,
   Button,
@@ -8,8 +10,50 @@ export const BasicForm = ({
   motion,
 }) => {
   const [errors, setErrors] = useState({});
+  // const myForm = localStorage.getItem("myForm");
+
+  useEffect(() => {
+    const newErrors = {};
+
+    const nameRegex = /^[A-Za-zА-Яа-яӨөҮүЁё]+$/;
+
+    if (nameRegex.test(form.firstName)) {
+      newErrors.firstName = null;
+    } else {
+      newErrors.firstName = "Нэр ээ зөв оруулна уу";
+    }
+    setErrors({ ...errors, ...newErrors });
+  }, [form.firstName]);
+
+  useEffect(() => {
+    const newErrors = {};
+
+    const nameRegex = /^[A-Za-zА-Яа-яӨөҮүЁё]+$/;
+
+    if (nameRegex.test(form.lastName)) {
+      newErrors.lastName = null;
+    } else {
+      newErrors.lastName = "Овог нэр ээ зөв оруулна уу";
+    }
+    setErrors({ ...errors, ...newErrors });
+  }, [form.lastName]);
+
+  useEffect(() => {
+    const newErrors = {};
+
+    const nameRegex = /^[A-Za-zА-Яа-яӨөҮүЁё]+$/;
+
+    if (nameRegex.test(form.userName)) {
+      newErrors.userName = null;
+    } else {
+      newErrors.userName = "Хэрэглэгчийн нэр ээ зөв оруулна уу";
+    }
+    setErrors({ ...errors, ...newErrors });
+  }, [form.userName]);
 
   function goToNext() {
+    localStorage.setItem("myForm", "");
+
     const newErrors = {};
     const nameRegex = /^[A-Za-zА-Яа-яӨөҮүЁё]+$/;
 
@@ -30,6 +74,8 @@ export const BasicForm = ({
     }
     setErrors(newErrors);
     if (!newErrors.userName && !newErrors.firstName && !newErrors.lastName) {
+      localStorage.setItem("my-form", JSON.stringify(form));
+
       onChangeStep("onChangeStep");
     }
   }

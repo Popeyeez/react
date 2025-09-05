@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export const LastForm = ({
   Input,
   Button,
@@ -11,6 +13,19 @@ export const LastForm = ({
   const [errors, setErrors] = useState({});
   const [preview, setPreview] = useState();
 
+  useEffect(() => {
+    const newErrors = {};
+
+    const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+    if (dateRegex.test(form.date)) {
+      newErrors.date = null;
+    } else {
+      newErrors.date = "Он сар зөв оруулна уу";
+    }
+    setErrors({ ...errors, ...newErrors });
+  }, [form.date]);
+
   function handleImageChange(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -23,7 +38,10 @@ export const LastForm = ({
       file: file,
     });
   }
+  console.log("myForm");
+
   function goToNext() {
+    localStorage.setItem("myForm", "");
     const newErrors = {};
     const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 
@@ -39,6 +57,7 @@ export const LastForm = ({
     }
     setErrors(newErrors);
     if (!newErrors.date && !newErrors.file) {
+      localStorage.setItem("my-form", JSON.stringify(form));
       onChangeStep("onChangeStep");
     }
   }

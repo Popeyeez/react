@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export function ImageForm({
   Input,
   Button,
@@ -9,8 +11,57 @@ export function ImageForm({
   motion,
 }) {
   const [errors, setErrors] = useState({});
+  useEffect(() => {
+    const newErrors = {};
+
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if (emailRegex.test(form.email)) {
+      newErrors.email = null;
+    } else {
+      newErrors.email = "Имэйл хаяг зөв оруулна уу";
+    }
+    setErrors({ ...errors, ...newErrors });
+  }, [form.email]);
+
+  useEffect(() => {
+    const newErrors = {};
+
+    const phoneRegex = /^[89]\d{7}$/;
+
+    if (phoneRegex.test(form.phoneNumber)) {
+      newErrors.phoneNumber = null;
+    } else {
+      newErrors.phoneNumber = "Утасны дугаар зөв оруулна уу";
+    }
+    setErrors({ ...errors, ...newErrors });
+  }, [form.phoneNumber]);
+
+  useEffect(() => {
+    const newErrors = {};
+
+    if (form.password === form.confirmPassword) {
+      newErrors.confirmPassword = null;
+    } else {
+      newErrors.confirmPassword = "Нууц үг ижил байх ёстой";
+    }
+    setErrors({ ...errors, ...newErrors });
+  }, [form.confirmPassword]);
+
+  useEffect(() => {
+    const newErrors = {};
+
+    if (form.password !== "") {
+      newErrors.password = null;
+    } else {
+      newErrors.password = "Нууц үг хийнэ үү";
+    }
+    setErrors({ ...errors, ...newErrors });
+  }, [form.password]);
 
   function goToNext() {
+    localStorage.setItem("myForm", "");
+
     const newErrors = {};
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const phoneRegex = /^[89]\d{7}$/;
@@ -45,6 +96,7 @@ export function ImageForm({
       !newErrors.confirmPassword &&
       !newErrors.password
     ) {
+      localStorage.setItem("my-form", JSON.stringify(form));
       onChangeStep("onChangeStep");
     }
   }
