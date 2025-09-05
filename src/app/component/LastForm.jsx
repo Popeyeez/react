@@ -38,10 +38,8 @@ export const LastForm = ({
       file: file,
     });
   }
-  console.log("myForm");
 
   function goToNext() {
-    localStorage.setItem("myForm", "");
     const newErrors = {};
     const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 
@@ -57,7 +55,6 @@ export const LastForm = ({
     }
     setErrors(newErrors);
     if (!newErrors.date && !newErrors.file) {
-      localStorage.setItem("my-form", JSON.stringify(form));
       onChangeStep("onChangeStep");
     }
   }

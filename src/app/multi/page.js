@@ -23,13 +23,13 @@ const Multi = () => {
     date: "",
     file: "",
   });
+  console.log(form);
 
   useEffect(() => {
     const localForm = localStorage.getItem("my-form");
     if (localForm) {
       setForm(JSON.parse(localForm));
     }
-    console.log(localForm);
   }, []);
 
   const [step, setStep] = useState("basic");
